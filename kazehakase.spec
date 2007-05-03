@@ -1,6 +1,6 @@
 %define	name      kazehakase
-%define	version   0.4.4.1
-%define	release   %mkrel 2
+%define	version   0.4.6
+%define	release   %mkrel 1
 
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
@@ -10,7 +10,7 @@ Summary:   A fast and light tabbed web browser using gecko
 Version:   %{version}
 Release:   %{release}
 URL:       http://kazehakase.sourceforge.jp
-Source0:   %{name}-%{version}.tar.bz2
+Source0:   %{name}-%{version}.tar.gz
 # icons
 Source10:  %{name}-16.png
 Source11:  %{name}-32.png
@@ -20,6 +20,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:   GPL
 Requires:        %{libname} = %{version}
 Requires:        mozilla-firefox
+BuildRequires:   intltool
 BuildRequires:   mozilla-firefox-devel desktop-file-utils
 BuildRequires:   gtk+2-devel automake1.8 gnutls-devel
 
@@ -106,6 +107,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kazehakase/search-result.css
 %{_datadir}/kazehakase/icons/*
 %{_datadir}/pixmaps/*
+%dir %{_libdir}/kazehakase
+%dir %{_libdir}/kazehakase/embed
+%{_libdir}/kazehakase/embed/gecko.la
+%{_libdir}/kazehakase/embed/gecko.so
+%dir %{_libdir}/kazehakase/search
 %{_mandir}/man1/*
 %_menudir/%name
 %_liconsdir/%name.png
