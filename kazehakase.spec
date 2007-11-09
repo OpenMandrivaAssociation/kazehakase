@@ -69,7 +69,7 @@ install -m 644 %SOURCE12 %{buildroot}/%{_iconsdir}/hicolor/48x48/apps/%{name}.pn
 rm -f %{buildroot}/%{_libdir}/kazehakase/*.{la,so}
 
 # menu
-perl -pi -e 's,kazehakase-icon.png,%{name}.png,g' %{buildroot}%{_datadir}/applications/*
+perl -pi -e 's,kazehakase-icon.png,%{name},g' %{buildroot}%{_datadir}/applications/*
 desktop-file-install --vendor="" \
   --remove-key="Encoding" \
   --remove-category="Application" \
