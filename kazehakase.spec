@@ -17,6 +17,7 @@ Source10:	%{name}-16.png
 Source11:	%{name}-32.png
 Source12:	%{name}-48.png
 Group:		Networking/WWW
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
 Requires:	%{libname} = %{version}
 Requires:	mozilla-firefox
