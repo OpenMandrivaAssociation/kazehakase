@@ -1,6 +1,6 @@
 %define	name      kazehakase
 %define	version   0.5.0
-%define	release   %mkrel 1
+%define	release   %mkrel 2
 
 %define libname_orig	lib%{name}
 %define major		0
@@ -113,4 +113,3 @@ rm -rf %{buildroot}
 %files -n %{libname}
 %defattr(-,root,root)
 %{_libdir}/kazehakase/*.so.%{major}*
-
