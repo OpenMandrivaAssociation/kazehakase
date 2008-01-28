@@ -1,15 +1,11 @@
-%define	name      kazehakase
-%define	version   0.5.0
-%define	release   %mkrel 2
-
 %define libname_orig	lib%{name}
 %define major		0
 %define libname		%mklibname %{name} %{major}
 
-Name:		%{name}
+Name:		kazehakase
 Summary:	A fast and light tabbed web browser using gecko
-Version:	%{version}
-Release:	%{release}
+Version:	0.5.2
+Release:	%mkrel 1
 URL:		http://kazehakase.sourceforge.jp
 Source0:	%{name}-%{version}.tar.gz
 # icons
@@ -20,7 +16,6 @@ Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
 Requires:	%{libname} = %{version}
-Requires:	mozilla-firefox
 BuildRequires:	intltool
 BuildRequires:	mozilla-firefox-devel
 BuildRequires:	desktop-file-utils
@@ -69,7 +64,7 @@ install -m 644 %SOURCE12 %{buildroot}/%{_iconsdir}/hicolor/48x48/apps/%{name}.pn
 rm -f %{buildroot}/%{_libdir}/kazehakase/*.{la,so}
 
 # menu
-perl -pi -e 's,kazehakase-icon.png,%{name},g' %{buildroot}%{_datadir}/applications/*
+sed -i -e 's,kazehakase-icon.png,%{name},g' %{buildroot}%{_datadir}/applications/*
 desktop-file-install --vendor="" \
   --remove-key="Encoding" \
   --remove-category="Application" \
