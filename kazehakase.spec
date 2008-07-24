@@ -4,7 +4,7 @@
 
 Name:		kazehakase
 Summary:	A fast and light tabbed web browser using gecko
-Version:	0.5.2
+Version:	0.5.4
 Release:	%mkrel 1
 URL:		http://kazehakase.sourceforge.jp
 Source0:	%{name}-%{version}.tar.gz
@@ -41,8 +41,6 @@ Kazehakase library.
 %setup -q
 
 %build
-# force to regenerate configure
-cp /usr/share/automake-1.10/mkinstalldirs .
 ./autogen.sh
 %configure2_5x \
 	--enable-migemo 
