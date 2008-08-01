@@ -4,7 +4,7 @@
 
 Name:		kazehakase
 Summary:	A fast and light tabbed web browser using gecko
-Version:	0.5.4
+Version:	0.5.5
 Release:	%mkrel 1
 URL:		http://kazehakase.sourceforge.jp
 Source0:	%{name}-%{version}.tar.gz
@@ -17,11 +17,12 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
 Requires:	%{libname} = %{version}
 BuildRequires:	intltool
-BuildRequires:	mozilla-firefox-devel
+BuildRequires:	xulrunner-devel-unstable
 BuildRequires:	desktop-file-utils
 BuildRequires:	gtk+2-devel
 BuildRequires:	automake
 BuildRequires:	gnutls-devel
+Requires:	%mklibname xulrunner 1.9
 
 %description
 Kazehakase is a fast and light tabbed browser using gecko.
@@ -43,7 +44,8 @@ Kazehakase library.
 %build
 ./autogen.sh
 %configure2_5x \
-	--enable-migemo 
+	--enable-migemo \
+	--with-gecko-engine=libxul
 %make
 
 %install
