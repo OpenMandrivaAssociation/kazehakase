@@ -1,17 +1,31 @@
-%define libname_orig	lib%{name}
 %define major		0
 %define libname		%mklibname %{name} %{major}
 
+%define rel	1
+%define svn	3511
+
+%if %svn
+%define release		%mkrel 0.%{svn}.%{rel}
+%define distname	%{name}-%{svn}.tar.lzma
+%define dirname		%{name}
+%else
+%define release		%mkrel %{rel}
+%define distname	%{name}-%{version}.tar.gz
+%define dirname		%{name}-%{version}
+%endif
+
 Name:		kazehakase
 Summary:	A fast and light tabbed web browser using gecko
-Version:	0.5.5
-Release:	%mkrel 1
+Version:	0.5.6
+Release:	%{release}
 URL:		http://kazehakase.sourceforge.jp
-Source0:	%{name}-%{version}.tar.gz
+Source0:	%{distname}
 # icons
 Source10:	%{name}-16.png
 Source11:	%{name}-32.png
 Source12:	%{name}-48.png
+Patch0:		kazehakase-0.5.5-gentoo-xulrunner19.patch
+Patch1:		kazehakase-0.5.5-underlink.patch
 Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
@@ -22,7 +36,6 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	gtk+2-devel
 BuildRequires:	automake
 BuildRequires:	gnutls-devel
-Requires:	%mklibname xulrunner 1.9
 
 %description
 Kazehakase is a fast and light tabbed browser using gecko.
@@ -32,14 +45,15 @@ Kazehakase is a fast and light tabbed browser using gecko.
 %package -n %{libname}
 Summary:	Kazehakase library
 Group:		System/Internationalization
-Provides:	%{libname_orig} = %{version}-%{release}
 
 %description -n %{libname}
 Kazehakase library.
 
 
 %prep
-%setup -q
+%setup -q -n %{dirname}
+%patch0 -p1 -b .xul
+%patch1 -p1 -b .underlink
 
 %build
 ./autogen.sh
@@ -56,9 +70,9 @@ rm -rf %{buildroot}
 
 # icons
 mkdir -p %{buildroot}/%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
-install -m 644 %SOURCE10 %{buildroot}/%{_iconsdir}/hicolor/16x16/apps/%{name}.png
-install -m 644 %SOURCE11 %{buildroot}/%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-install -m 644 %SOURCE12 %{buildroot}/%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+install -m 644 %{SOURCE10} %{buildroot}/%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+install -m 644 %{SOURCE11} %{buildroot}/%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+install -m 644 %{SOURCE12} %{buildroot}/%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 
 # remove devel files
 rm -f %{buildroot}/%{_libdir}/kazehakase/*.{la,so}
@@ -101,9 +115,7 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/kazehakase/*
 %{_bindir}/*
 %{_datadir}/applications/*
-%{_datadir}/kazehakase/kz-no-thumbnail.png
-%{_datadir}/kazehakase/search-result.css
-%{_datadir}/kazehakase/icons/*
+%{_datadir}/%{name}
 %{_datadir}/pixmaps/*
 %dir %{_libdir}/kazehakase
 %dir %{_libdir}/kazehakase/embed
