@@ -1,8 +1,8 @@
 %define major		0
 %define libname		%mklibname %{name} %{major}
 
-%define rel	2
-%define svn	3511
+%define rel	1
+%define svn	0
 
 %if %svn
 %define release		%mkrel 0.%{svn}.%{rel}
