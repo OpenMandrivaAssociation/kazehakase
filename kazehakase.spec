@@ -1,7 +1,12 @@
+%define _requires_exceptions libnspr4\\|libplc4\\|libplds4\\|libnss\\|libsmime3\\|libsoftokn\\|libssl3\\|libgtkembedmoz\\|libxpcom
+%define xulrunner 1.9
+%define xulname %mklibname xulrunner %xulrunner
+%define xulver %(rpm -q --queryformat %%{VERSION} %libname)
+
 %define major		0
 %define libname		%mklibname %{name} %{major}
 
-%define rel	1
+%define rel	2
 %define svn	0
 
 %if %svn
@@ -30,6 +35,7 @@ Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
 Requires:	%{libname} = %{version}
+Requires:	%{xulname} = %{xulver}
 BuildRequires:	intltool
 BuildRequires:	xulrunner-devel-unstable
 BuildRequires:	desktop-file-utils
