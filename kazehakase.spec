@@ -31,6 +31,7 @@ Source11:	%{name}-32.png
 Source12:	%{name}-48.png
 Patch0:		kazehakase-0.5.5-gentoo-xulrunner19.patch
 Patch1:		kazehakase-0.5.5-underlink.patch
+Patch2:		kazehakase-0.5.6-fix-str-fmt.patch
 Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
@@ -60,6 +61,7 @@ Kazehakase library.
 %setup -q -n %{dirname}
 %patch0 -p1 -b .xul
 %patch1 -p1 -b .underlink
+%patch2 -p0 -b .str
 
 %build
 ./autogen.sh
