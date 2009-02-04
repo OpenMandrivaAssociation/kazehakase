@@ -1,12 +1,12 @@
 %define _requires_exceptions libnspr4\\|libplc4\\|libplds4\\|libnss\\|libsmime3\\|libsoftokn\\|libssl3\\|libgtkembedmoz\\|libxpcom
 %define xulrunner 1.9
 %define xulname %mklibname xulrunner %xulrunner
-%define xulver %(rpm -q --queryformat %%{VERSION} %libname)
+%define xulver %(rpm -q --queryformat %%{VERSION} %xulname)
 
 %define major		0
 %define libname		%mklibname %{name} %{major}
 
-%define rel	2
+%define rel	3
 %define svn	0
 
 %if %svn
