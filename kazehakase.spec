@@ -6,7 +6,7 @@
 %define major		0
 %define libname		%mklibname %{name} %{major}
 
-%define rel	3
+%define rel	4
 %define svn	0
 
 %if %svn
