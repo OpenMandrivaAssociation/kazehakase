@@ -6,7 +6,7 @@
 %define major		0
 %define libname		%mklibname %{name} %{major}
 
-%define rel	6
+%define rel	7
 %define svn	0
 
 %if %svn
@@ -32,6 +32,7 @@ Source12:	%{name}-48.png
 Patch0:		kazehakase-0.5.5-gentoo-xulrunner19.patch
 Patch1:		kazehakase-0.5.5-underlink.patch
 Patch2:		kazehakase-0.5.6-fix-str-fmt.patch
+Patch3:		kazehakase-0.5.6-gnutls-2.8.patch
 Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
@@ -62,6 +63,7 @@ Kazehakase library.
 %patch0 -p1 -b .xul
 %patch1 -p1 -b .underlink
 %patch2 -p0 -b .str
+%patch3 -p0 -b .gnutls
 
 %build
 ./autogen.sh
