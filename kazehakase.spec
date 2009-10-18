@@ -39,7 +39,7 @@ License:	GPLv2+
 Requires:	%{libname} = %{version}
 Requires:	%{xulname} = %{xulver}
 BuildRequires:	intltool
-BuildRequires:	xulrunner-devel-unstable
+BuildRequires:	xulrunner-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	gtk+2-devel
 BuildRequires:	automake
