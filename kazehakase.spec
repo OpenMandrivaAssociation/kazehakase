@@ -2,7 +2,7 @@
 %define libname		%mklibname %{name} %{major}
 
 Name:		kazehakase
-Summary:	A fast and light tabbed web browser using gecko
+Summary:	A fast and light tabbed web browser using webkit
 Version:	0.5.8
 Release:	%mkrel 1
 URL:		http://kazehakase.sourceforge.jp
@@ -23,7 +23,7 @@ BuildRequires:	automake
 BuildRequires:	gnutls-devel
 
 %description
-Kazehakase is a fast and light tabbed browser using gecko.
+Kazehakase is a fast and light tabbed browser using webkit.
 "Kaze" means "wind", and "Hakase" means "Dr." in Japanese.
 
 
