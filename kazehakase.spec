@@ -1,45 +1,22 @@
-%define _requires_exceptions libnspr4\\|libplc4\\|libplds4\\|libnss\\|libsmime3\\|libsoftokn\\|libssl3\\|libgtkembedmoz\\|libxpcom
-%define xulrunner 1.9
-%define xulname %mklibname xulrunner %xulrunner
-%define xulver %(rpm -q --queryformat %%{VERSION} %xulname)
-
 %define major		0
 %define libname		%mklibname %{name} %{major}
 
-%define rel	9
-%define svn	0
-
-%if %svn
-%define release		%mkrel 0.%{svn}.%{rel}
-%define distname	%{name}-%{svn}.tar.lzma
-%define dirname		%{name}
-%else
-%define release		%mkrel %{rel}
-%define distname	%{name}-%{version}.tar.gz
-%define dirname		%{name}-%{version}
-%endif
-
 Name:		kazehakase
 Summary:	A fast and light tabbed web browser using gecko
-Version:	0.5.6
-Release:	%{release}
+Version:	0.5.8
+Release:	%mkrel 1
 URL:		http://kazehakase.sourceforge.jp
-Source0:	%{distname}
-# icons
+Source0:	http://jaist.dl.sourceforge.jp/kazehakase/43802/%{name}-%{version}.tar.gz
 Source10:	%{name}-16.png
 Source11:	%{name}-32.png
 Source12:	%{name}-48.png
-Patch0:		kazehakase-0.5.5-gentoo-xulrunner19.patch
-Patch1:		kazehakase-0.5.5-underlink.patch
-Patch2:		kazehakase-0.5.6-fix-str-fmt.patch
-Patch3:		kazehakase-0.5.6-gnutls-2.8.patch
+Patch0:		kazehakase-0.5.8-fix-linkage.patch
 Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
 Requires:	%{libname} = %{version}
-Requires:	%{xulname} = %{xulver}
 BuildRequires:	intltool
-BuildRequires:	xulrunner-devel
+BuildRequires:	webkitgtk-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	gtk+2-devel
 BuildRequires:	automake
@@ -57,20 +34,16 @@ Group:		System/Internationalization
 %description -n %{libname}
 Kazehakase library.
 
-
 %prep
-%setup -q -n %{dirname}
-%patch0 -p1 -b .xul
-%patch1 -p1 -b .underlink
-%patch2 -p0 -b .str
-%patch3 -p0 -b .gnutls
+%setup -q -n %{name}-%{version}
+%patch0 -p0
 
 %build
 ./autogen.sh
 %configure2_5x \
 	--enable-migemo \
-	--with-gecko-engine=libxul
-%make
+	--with-gecko-engine=no
+make
 
 %install
 rm -rf %{buildroot}
@@ -85,7 +58,7 @@ install -m 644 %{SOURCE11} %{buildroot}/%{_iconsdir}/hicolor/32x32/apps/%{name}.
 install -m 644 %{SOURCE12} %{buildroot}/%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 
 # remove devel files
-rm -f %{buildroot}/%{_libdir}/kazehakase/*.{la,so}
+rm -f %{buildroot}/%{_libdir}/kazehakase/*.{la,so} %{buildroot}/%{_libdir}/kazehakase/*/*.la
 
 # menu
 sed -i -e 's,kazehakase-icon.png,%{name},g' %{buildroot}%{_datadir}/applications/*
@@ -129,8 +102,8 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/*
 %dir %{_libdir}/kazehakase
 %dir %{_libdir}/kazehakase/embed
-%{_libdir}/kazehakase/embed/gecko.la
-%{_libdir}/kazehakase/embed/gecko.so
+%{_libdir}/kazehakase/embed/webkit_gtk.so
+%{_libdir}/kazehakase/embed/per_process.so
 %dir %{_libdir}/kazehakase/search
 %{_mandir}/man1/*
 %{_iconsdir}/hicolor/*/apps/%{name}.png
