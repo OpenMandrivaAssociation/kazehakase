@@ -4,7 +4,7 @@
 Name:		kazehakase
 Summary:	A fast and light tabbed web browser using webkit
 Version:	0.5.8
-Release:	%mkrel 1
+Release:	%mkrel 2
 URL:		http://kazehakase.sourceforge.jp
 Source0:	http://jaist.dl.sourceforge.jp/kazehakase/43802/%{name}-%{version}.tar.gz
 Source10:	%{name}-16.png
@@ -25,7 +25,6 @@ BuildRequires:	gnutls-devel
 %description
 Kazehakase is a fast and light tabbed browser using webkit.
 "Kaze" means "wind", and "Hakase" means "Dr." in Japanese.
-
 
 %package -n %{libname}
 Summary:	Kazehakase library
