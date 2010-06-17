@@ -11,6 +11,7 @@ Source10:	%{name}-16.png
 Source11:	%{name}-32.png
 Source12:	%{name}-48.png
 Patch0:		kazehakase-0.5.8-fix-linkage.patch
+Patch1:		kazehakase-0.5.8-gtk2.20.patch
 Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
@@ -36,6 +37,7 @@ Kazehakase library.
 %prep
 %setup -q -n %{name}-%{version}
 %patch0 -p0
+%patch1 -p2
 
 %build
 ./autogen.sh
