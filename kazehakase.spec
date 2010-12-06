@@ -4,7 +4,7 @@
 Name:		kazehakase
 Summary:	A fast and light tabbed web browser using webkit
 Version:	0.5.8
-Release:	%mkrel 2
+Release:	%mkrel 3
 URL:		http://kazehakase.sourceforge.jp
 Source0:	http://jaist.dl.sourceforge.jp/kazehakase/43802/%{name}-%{version}.tar.gz
 Source10:	%{name}-16.png
