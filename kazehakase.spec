@@ -16,6 +16,9 @@ Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
 Requires:	%{libname} = %{version}
+BuildRequires:	autoconf
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:	intltool
 BuildRequires:	webkitgtk-devel
 BuildRequires:	desktop-file-utils
